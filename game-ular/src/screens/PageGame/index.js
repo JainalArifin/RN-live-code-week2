@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, Alert } from 'react-native'
-import { Container, Text, Card, Button, View } from 'native-base';
+import { Container, Text, Card, Button, CardItem, List, ListItem, Left, Thumbnail, Body, View } from 'native-base';
 
 // table
 import { Table, Row, Rows } from 'react-native-table-component';
@@ -14,6 +14,7 @@ export default class PageGameScreen extends Component {
         super(props);
         this.state = {
           randomNumber: 0,
+          menang: false,
           tableData: [
               ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12','13','14','15','16','17','18','19','20']
           ]
@@ -26,6 +27,9 @@ export default class PageGameScreen extends Component {
             randomNumber: randomNum
         })
         if(randomNum == '20'){
+            this.setState({
+                menang: true,
+            })
             Alert.alert('Selamat anda telah menang')
             this.props.navigation.navigate('Login')
         }
@@ -37,7 +41,9 @@ export default class PageGameScreen extends Component {
 
     componentDidMount (){
         Alert.alert('waktu anda 20 detik')
-        setTimeout(()=> this.andaKalah(), 20000)
+        if(this.state.menang == false){
+            setTimeout(()=> this.andaKalah(), 20000)
+        }
     }
 
     render () {
@@ -60,14 +66,15 @@ export default class PageGameScreen extends Component {
                     >
                         <Text>click me for random dadu</Text>
                     </Button>
-                    <Text
-                        style={{
-                            margin: 10,
-                            borderWidth: 3,
-                            borderColor: 'green',
-                            padding: 5,
-                        }}
-                    >angka dadu anda: {this.state.randomNumber}</Text>
+                        <List>
+                            <Text
+                                style={{
+                                    margin:10,
+                                    borderWidth: 3,
+                                    padding: 5,
+                                }}
+                            >angka dadu anda: {this.state.randomNumber}</Text>
+                        </List>
                     <Text
                         style={{
                             marginLeft: 10,
@@ -99,6 +106,15 @@ export default class PageGameScreen extends Component {
                         {/* <Row data={state.tableHead} style={styles.head} textStyle={styles.text}/> */}
                         <Rows data={state.tableData} textStyle={styles.text}/>
                     </Table>
+                </Card>
+                <Card>
+                    <View
+                        style={{
+                            flex:1,
+                            flexDirection: 'row'
+                        }}
+                    >
+                    </View>
                 </Card>
             </Container>
         )

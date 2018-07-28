@@ -25,11 +25,16 @@ export default class LoginScreen extends Component{
 
     render(){
         return(
-            <Container>
+            <Container
+
+            >
                 <Content>
                     <Card
                         style={{
-                            margin: 5,
+                            marginStart: 10,
+                            marginEnd: 10,
+                            borderRadius: 5,
+                            alignContent: 'center'
                         }}
                     >
                         <Form>
