@@ -41,9 +41,11 @@ export default class PageGameScreen extends Component {
 
     componentDidMount (){
         Alert.alert('waktu anda 20 detik')
-        if(this.state.menang == false){
-            setTimeout(()=> this.andaKalah(), 20000)
-        }
+        setTimeout(()=> {
+            if(this.state.menang == false){
+                this.andaKalah()
+            }
+        }, 20000)
     }
 
     render () {
